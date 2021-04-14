@@ -22,6 +22,23 @@ class Scheduling {
     }
   }
 
+  async getCountSchedulingDate(req, res) {
+    const { schedulingDate } = req.params;
+    const scheduling = await SchedulingModel.find({
+      schedulingDate: schedulingDate,
+    }).count();
+    res.send({ data: scheduling });
+  }
+
+  async getCountSchedulingTime(req, res) {
+    const { schedulingDate,schedulingTime } = req.params;
+    const scheduling = await SchedulingModel.find({
+      schedulingDate: schedulingDate,
+      schedulingTime: schedulingTime
+    }).count();
+    res.send({ data: scheduling });
+  }
+
   async remove(req, res) {
     const { id } = req.params;
     try {
@@ -31,6 +48,17 @@ class Scheduling {
       }
       await scheduling.remove();
       res.send({ message: "Agendamento removido com sucesso." });
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
+  }
+
+  async removeAll(req, res) {
+    try {
+      await SchedulingModel.deleteMany({});
+      res.send({
+        message: "Todos os agendamentos foram removidos com sucesso.",
+      });
     } catch (error) {
       res.status(400).send({ message: error.message });
     }
