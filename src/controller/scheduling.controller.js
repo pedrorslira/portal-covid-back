@@ -3,7 +3,7 @@ const SchedulingModel = require("../model/scheduling.model");
 class Scheduling {
   async index(req, res) {
     const schedulings = await SchedulingModel.find();
-    res.send({ schedulings });
+    res.send({ data: schedulings });
   }
 
   async store(req, res) {
@@ -31,10 +31,10 @@ class Scheduling {
   }
 
   async getCountSchedulingTime(req, res) {
-    const { schedulingDate,schedulingTime } = req.params;
+    const { schedulingDate, schedulingTime } = req.params;
     const scheduling = await SchedulingModel.find({
       schedulingDate: schedulingDate,
-      schedulingTime: schedulingTime
+      schedulingTime: schedulingTime,
     }).count();
     res.send({ data: scheduling });
   }
