@@ -9,5 +9,6 @@ Routes.delete("/scheduling/:id", SchedulingController.remove);
 Routes.delete("/schedulings",SchedulingController.removeAll);
 Routes.get("/scheduling/date/:schedulingDate",SchedulingController.getCountSchedulingDate);
 Routes.get("/scheduling/:schedulingDate/:schedulingTime",SchedulingController.getCountSchedulingTime);
+Routes.put("/scheduling/:id", SchedulingController.update);
 
 module.exports = Routes;

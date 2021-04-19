@@ -63,6 +63,17 @@ class Scheduling {
       res.status(400).send({ message: error.message });
     }
   }
+
+  async update(req, res) {
+    const {
+      body,
+      params: { id },
+    } = req;
+    const scheduling = await SchedulingModel.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+    res.send({ scheduling });
+  }
 }
 
 module.exports = new Scheduling();
